@@ -9,6 +9,9 @@ app.use(express.json());
 
 const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
+app.use(express.static("public"));
+
+
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
 
@@ -35,6 +38,10 @@ app.post("/chat", async (req, res) => {
 
 app.get("/", (req, res) => {
   res.send("AI Chatbot API is running.");
+});
+
+app.get("/widget-ui", (req, res) => {
+  res.sendFile(__dirname + "/public/widget-ui.html");
 });
 
 const PORT = process.env.PORT || 3000;
