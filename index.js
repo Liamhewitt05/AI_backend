@@ -1,9 +1,7 @@
-require("dotenv").config();
-console.log("OPENAI_API_KEY:", process.env.OPENAI_API_KEY ? "SET" : "NOT SET");
-
 const express = require("express");
 const cors = require("cors");
 const { OpenAI } = require("openai");
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
@@ -13,6 +11,10 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
+
+app.get("/", (req, res) => {
+  res.send("AI Chatbot API is running.");
+});
 
   try {
     const chatResponse = await openai.chat.completions.create({
