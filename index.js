@@ -12,10 +12,6 @@ const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
 
-app.get("/", (req, res) => {
-  res.send("AI Chatbot API is running.");
-});
-
   try {
     const chatResponse = await openai.chat.completions.create({
       model: "gpt-4",
@@ -35,6 +31,10 @@ app.get("/", (req, res) => {
     console.error("Error:", error);
     res.status(500).json({ error: "Failed to get response" });
   }
+});
+
+app.get("/", (req, res) => {
+  res.send("AI Chatbot API is running.");
 });
 
 const PORT = process.env.PORT || 3000;
