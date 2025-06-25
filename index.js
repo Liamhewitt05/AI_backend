@@ -14,6 +14,7 @@ app.use(express.static("public"));
 
 app.post("/chat", async (req, res) => {
   const { message } = req.body;
+  console.log("📩 Incoming message:", message);
 
   try {
     const chatResponse = await openai.chat.completions.create({
